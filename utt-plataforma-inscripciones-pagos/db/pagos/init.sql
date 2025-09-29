@@ -1,0 +1,9 @@
+-- DB pagos
+CREATE TABLE IF NOT EXISTS pagos (
+  id UUID PRIMARY KEY,
+  matricula VARCHAR(20) NOT NULL,
+  concepto VARCHAR(100) NOT NULL,
+  monto NUMERIC(10,2) NOT NULL,
+  estado VARCHAR(20) NOT NULL DEFAULT 'pendiente',
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);

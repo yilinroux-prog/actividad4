@@ -1,0 +1,76 @@
+version: "3.9"
+services:
+  api-gateway:
+    build: ./gateway
+    ports:
+      - "8080:80"
+    depends_on:
+      - auth-service
+      - inscripciones-service
+      - pagos-service
+      - notifications-service
+
+  auth-service:
+    build: ./services/auth-service
+    environment:
+      - PORT=3000
+      - JWT_SECRET=supersecret
+      - ALLOWED_DOMAIN=uttehuacan.edu.mx
+
+  inscripciones-service:
+    build: ./services/inscripciones-service
+    environment:
+      - PORT=3001
+      - JWT_SECRET=supersecret
+      - PGHOST=alumnos-db
+      - PGUSER=postgres
+      - PGPASSWORD=postgres
+      - PGDATABASE=alumnos
+      - PGPORT=5432
+    depends_on:
+      - alumnos-db
+
+  pagos-service:
+    build: ./services/pagos-service
+    environment:
+      - PORT=3002
+      - JWT_SECRET=supersecret
+      - PGHOST=pagos-db
+      - PGUSER=postgres
+      - PGPASSWORD=postgres
+      - PGDATABASE=pagos
+      - PGPORT=5432
+      - NOTIFICATIONS_URL=http://notifications-service:3003
+      - RECEIPTS_DIR=/usr/src/app/receipts
+    volumes:
+      - ./services/pagos-service/receipts:/usr/src/app/receipts
+    depends_on:
+      - pagos-db
+      - notifications-service
+
+  notifications-service:
+    build: ./services/notifications-service
+    environment:
+      - PORT=3003
+
+  alumnos-db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=alumnos
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./db/alumnos/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  pagos-db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=pagos
+    ports:
+      - "5434:5432"
+    volumes:
+      - ./db/pagos/init.sql:/docker-entrypoint-initdb.d/init.sql
