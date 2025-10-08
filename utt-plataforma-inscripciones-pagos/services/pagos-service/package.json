@@ -4,7 +4,12 @@
   "main": "src/index.js",
   "type": "commonjs",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "lint": "echo \"(ESLint opcional en demo)\"",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "build": "echo \"(build no requerido en JS puro)\"",
+    "docs": "node -e \"require('fs').mkdirSync('docs',{recursive:true});require('fs').writeFileSync('docs/swagger.json','{}')\""
   },
   "dependencies": {
     "axios": "^1.6.8",
@@ -15,5 +20,19 @@
     "pg": "^8.11.3",
     "pdfkit": "^0.13.0",
     "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coverageThreshold": {
+      "global": {
+        "branches": 70,
+        "functions": 70,
+        "lines": 70,
+        "statements": 70
+      }
+    }
   }
 }

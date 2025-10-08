@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1759913106641" clover="3.2.0">
+  <project timestamp="1759913106641" name="All files">
+    <metrics statements="63" coveredstatements="56" conditionals="23" coveredconditionals="17" methods="20" coveredmethods="20" elements="106" coveredelements="93" complexity="0" loc="63" ncloc="63" packages="7" files="8" classes="8"/>
+    <package name="application">
+      <metrics statements="17" coveredstatements="13" conditionals="5" coveredconditionals="3" methods="2" coveredmethods="2"/>
+      <file name="CreatePago.js" path="C:\Users\SAM\Downloads\utt (1)\utt-plataforma-inscripciones-pagos\services\pagos-service\src\application\CreatePago.js">
+        <metrics statements="17" coveredstatements="13" conditionals="5" coveredconditionals="3" methods="2" coveredmethods="2"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="7" count="4" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="15" count="4" type="stmt"/>
+        <line num="16" count="4" type="stmt"/>
+        <line num="18" count="4" type="stmt"/>
+        <line num="19" count="4" type="stmt"/>
+        <line num="20" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="23" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="40" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="domain">
+      <metrics statements="8" coveredstatements="8" conditionals="3" coveredconditionals="2" methods="1" coveredmethods="1"/>
+      <file name="Pago.js" path="C:\Users\SAM\Downloads\utt (1)\utt-plataforma-inscripciones-pagos\services\pagos-service\src\domain\Pago.js">
+        <metrics statements="8" coveredstatements="8" conditionals="3" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="4" count="4" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="7" count="4" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="9" count="4" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="domain.events">
+      <metrics statements="7" coveredstatements="7" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+      <file name="PaymentConfirmed.js" path="C:\Users\SAM\Downloads\utt (1)\utt-plataforma-inscripciones-pagos\services\pagos-service\src\domain\events\PaymentConfirmed.js">
+        <metrics statements="7" coveredstatements="7" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="11" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="infrastructure.adapters">
+      <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="6"/>
+      <file name="BBVAAdapter.js" path="C:\Users\SAM\Downloads\utt (1)\utt-plataforma-inscripciones-pagos\services\pagos-service\src\infrastructure\adapters\BBVAAdapter.js">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="1" count="4" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="21" count="4" type="stmt"/>
+      </file>
+      <file name="IPaymentGateway.js" path="C:\Users\SAM\Downloads\utt (1)\utt-plataforma-inscripciones-pagos\services\pagos-service\src\infrastructure\adapters\IPaymentGateway.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="10" count="5" type="stmt"/>
+      </file>
+    </package>
+    <package name="infrastructure.dao">
+      <metrics statements="13" coveredstatements="10" conditionals="8" coveredconditionals="7" methods="6" coveredmethods="6"/>
+      <file name="PaymentDAO.js" path="C:\Users\SAM\Downloads\utt (1)\utt-plataforma-inscripciones-pagos\services\pagos-service\src\infrastructure\dao\PaymentDAO.js">
+        <metrics statements="13" coveredstatements="10" conditionals="8" coveredconditionals="7" methods="6" coveredmethods="6"/>
+        <line num="7" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="14" count="6" type="stmt"/>
+        <line num="15" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="16" count="6" type="stmt"/>
+        <line num="17" count="6" type="stmt"/>
+        <line num="21" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="25" count="2" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="30" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="36" count="4" type="stmt"/>
+      </file>
+    </package>
+    <package name="infrastructure.events">
+      <metrics statements="4" coveredstatements="4" conditionals="1" coveredconditionals="0" methods="3" coveredmethods="3"/>
+      <file name="EventPublisher.js" path="C:\Users\SAM\Downloads\utt (1)\utt-plataforma-inscripciones-pagos\services\pagos-service\src\infrastructure\events\EventPublisher.js">
+        <metrics statements="4" coveredstatements="4" conditionals="1" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="infrastructure.factory">
+      <metrics statements="5" coveredstatements="5" conditionals="5" coveredconditionals="4" methods="1" coveredmethods="1"/>
+      <file name="PaymentGatewayFactory.js" path="C:\Users\SAM\Downloads\utt (1)\utt-plataforma-inscripciones-pagos\services\pagos-service\src\infrastructure\factory\PaymentGatewayFactory.js">
+        <metrics statements="5" coveredstatements="5" conditionals="5" coveredconditionals="4" methods="1" coveredmethods="1"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="5" count="3" type="cond" truecount="3" falsecount="1"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
