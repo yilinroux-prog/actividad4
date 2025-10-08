@@ -12,9 +12,10 @@ concurrency:
   group: pagos-${{ github.ref }}
   cancel-in-progress: true
 
+
 defaults:
   run:
-    working-directory: services/pagos-service
+    working-directory: utt-plataforma-inscripciones-pagos/services/pagos-service
 
 jobs:
   build-test:
@@ -26,6 +27,13 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Show PWD and LS (diagnostic)
+        run: |
+          pwd
+          ls -la
+          echo "---- up one level ----"
+          cd ..
+          ls -la
 
       - name: Install
         run: |
