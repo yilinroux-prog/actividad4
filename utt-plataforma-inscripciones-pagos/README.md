@@ -104,3 +104,114 @@ curl -L http://localhost:8080/api/pagos/receipt/<id> -o recibo.pdf
 - **JWT**: firmado por `JWT_SECRET` (solo propósitos de demo). No hay contraseñas; en producción integraría SSO (Microsoft 365) y reglas de emisión.
 - **Pagos**: la “pasarela” está simulada y **no** procesa tarjetas (no es PCI-DSS).
 - **Datos**: sin PII sensible; tablas de ejemplo y recibos de prueba.
+
+
+Parte 2 – Actividad 5: Implementación de Patrones y CI/CD
+Objetivo
+
+Extender el prototipo de la Plataforma UTT aplicando cuatro patrones de diseño en el microservicio pagos-service, e integrar un pipeline CI/CD en GitHub Actions con pruebas automatizadas y documentación.
+
+
+Patrones aplicados (en pagos-service)
+
+| Tipo               | Patrón                       | Descripción                                                                                           |
+| ------------------ | ---------------------------- | ----------------------------------------------------------------------------------------------------- |
+| **Creacional**     | **Factory Method**           | Permite crear adaptadores según el banco (`BBVA`, `Banamex`, etc.) sin modificar la lógica principal. |
+| **Estructural**    | **Adapter**                  | Convierte las solicitudes internas al formato esperado por cada API bancaria simulada.                |
+| **Comportamiento** | **Observer**                 | Notifica automáticamente al `notifications-service` cuando un pago es confirmado.                     |
+| **Emergente**      | **DAO (Data Access Object)** | Gestiona la persistencia en PostgreSQL (`PaymentDAO`) separando acceso a datos y lógica de negocio.   |
+
+Cada patrón se implementó en su carpeta respectiva dentro de src/infrastructure/:
+services/pagos-service/src/infrastructure/
+├── adapters/        # Adapter + Factory Method
+├── dao/             # DAO
+├── events/          # Observer (Publisher/Listener)
+└── factory/         # Factory Method
+
+Cobertura de Pruebas
+
+Se crearon tests unitarios para validar los patrones.
+
+Cobertura alcanzada: > 85% (branches > 70%) 
+
+Comando de ejecución:
+
+cd services/pagos-service
+npm run test:coverage
+ Evidencia:
+
+docs/evidence/coverage-summary.png (reporte de cobertura)
+
+docs/evidence/ci-success.png (pipeline en verde)
+
+CI/CD en GitHub Actions
+
+Se configuró el pipeline en .github/workflows/ci.yml con los siguientes pasos:
+
+Checkout del repo
+
+Setup Node.js (v20)
+
+Instalación de dependencias
+
+Lint
+
+Tests + cobertura
+
+Build y generación de docs
+
+Upload de artefactos (coverage y docs)
+
+ Evidencia:
+El workflow “pagos-service CI” corre automáticamente en cada push o pull request.
+
+UML y ADR Documentados
+
+Ubicación: /docs/
+
+docs/uml/pagos-service-clases.png → Diagrama de clases (Factory, Adapter, DAO, Observer).
+
+docs/uml/pagos-service-secuencia.png → Flujo: CreatePago → Factory/Adapter → DAO → EventPublisher/Listener.
+
+docs/adr/ADR-Factory-Adapter.md
+
+docs/adr/ADR-Observer.md
+
+docs/adr/ADR-DAO.md
+
+ Swagger y Documentación API
+
+Archivo: docs/swagger.json (OpenAPI 3.0)
+Contiene los endpoints de pagos-service:
+
+POST /api/pagos/create
+
+GET /api/pagos/list
+
+GET /api/pagos/receipt/:id
+
+ Evidencias entregadas
+docs/
+├── adr/
+│   ├── ADR-Factory-Adapter.md
+│   ├── ADR-Observer.md
+│   └── ADR-DAO.md
+├── uml/
+│   ├── pagos-service-clases.png
+│   └── pagos-service-secuencia.png
+├── swagger.json
+└── evidence/
+    ├── ci-success.png
+    └── coverage-summary.png
+
+Conclusión
+
+Esta segunda parte valida que:
+
+Los patrones de diseño están implementados correctamente.
+
+El servicio de pagos es modular, mantenible y extensible.
+
+El pipeline CI/CD automatiza la verificación de calidad del código.
+
+Se documenta la arquitectura con UML, ADR y Swagger.

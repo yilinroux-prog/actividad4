@@ -1,0 +1,131 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "UTT – pagos-service (prototipo)",
+    "version": "1.0.0",
+    "description": "API mínima del microservicio de Pagos para el prototipo (JWT por matrícula)."
+  },
+  "servers": [
+    { "url": "http://localhost:8080", "description": "Local via API Gateway (Nginx)" },
+    { "url": "http://localhost:3002", "description": "Directo al pagos-service (dev)" }
+  ],
+  "tags": [
+    { "name": "Pagos", "description": "Operaciones de pagos y recibos" }
+  ],
+  "paths": {
+    "/api/pagos/create": {
+      "post": {
+        "tags": ["Pagos"],
+        "summary": "Crear y confirmar un pago (flujo feliz simulado)",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["concepto", "monto"],
+                "properties": {
+                  "concepto": { "type": "string", "example": "Reinscripción" },
+                  "monto": { "type": "number", "format": "float", "example": 750.0 },
+                  "bankId": { "type": "string", "example": "BBVA" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Pago confirmado",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Pago" }
+              }
+            }
+          },
+          "400": { "description": "Faltan campos" },
+          "401": { "description": "Token inválido" },
+          "500": { "description": "Error al registrar pago" }
+        }
+      }
+    },
+    "/api/pagos/list": {
+      "get": {
+        "tags": ["Pagos"],
+        "summary": "Listar pagos por matrícula (del JWT)",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "matricula",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" },
+            "description": "En el prototipo puede pasarse por query; en prod se toma del JWT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Listado de pagos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Pago" }
+                }
+              }
+            }
+          },
+          "401": { "description": "Token inválido" },
+          "500": { "description": "Error al listar pagos" }
+        }
+      }
+    },
+    "/api/pagos/receipt/{id}": {
+      "get": {
+        "tags": ["Pagos"],
+        "summary": "Descargar recibo",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Recibo generado",
+            "content": {
+              "application/octet-stream": {
+                "schema": { "type": "string", "format": "binary" }
+              }
+            }
+          },
+          "401": { "description": "Token inválido" },
+          "404": { "description": "Recibo no encontrado" }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "JWT emitido por auth-service. En demo: sub=matrícula."
+      }
+    },
+    "schemas": {
+      "Pago": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string", "example": "d8c1a0e0-..." },
+          "matricula": { "type": "string", "example": "20231234" },
+          "concepto": { "type": "string", "example": "Reinscripción" },
+          "monto": { "type": "number", "format": "float", "example": 750.0 },
+          "estado": { "type": "string", "example": "aprobado" },
+          "status": { "type": "string", "example": "CONFIRMED", "description": "Presente en la versión modular por patrones" },
+          "bankId": { "type": "string", "example": "BBVA" },
+          "fecha": { "type": "string", "format": "date-time" }
+        }
+      }
+    }
+  }
+}
