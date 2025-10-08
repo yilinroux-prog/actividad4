@@ -26,10 +26,13 @@ jobs:
         with:
           node-version: "20"
           cache: "npm"
-          cache-dependency-path: package-lock.json  
+          # Ruta desde la RAÍZ del repo (setup-node no usa defaults)
+          cache-dependency-path: services/pagos-service/package-lock.json
 
       - name: Install
-        run: npm ci                                # usa lockfile
+        # A prueba de ramas sin lockfile: usa ci si existe, si no usa install
+        run: |
+          if [ -f package-lock.json ]; then npm ci; else npm install; fi
 
       - name: Lint
         run: npm run lint
