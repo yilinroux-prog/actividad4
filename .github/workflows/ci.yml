@@ -25,12 +25,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "npm"
-          # Ruta desde la RAÍZ del repo (setup-node no usa defaults)
-          cache-dependency-path: services/pagos-service/package-lock.json
+
 
       - name: Install
-        # A prueba de ramas sin lockfile: usa ci si existe, si no usa install
         run: |
           if [ -f package-lock.json ]; then npm ci; else npm install; fi
 
