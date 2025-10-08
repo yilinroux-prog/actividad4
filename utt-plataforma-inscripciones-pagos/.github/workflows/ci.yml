@@ -1,11 +1,13 @@
 name: pagos-service CI
+
 on:
-  push: { branches: [ "main" ] }
-  pull_request: { branches: [ "main" ] }
+  push:
+  pull_request:
+  workflow_dispatch:   
 
 defaults:
   run:
-    working-directory: utt-plataforma-inscripciones-pagos/services/pagos-service
+    working-directory: services/pagos-service   
 
 jobs:
   build-test:
@@ -18,10 +20,10 @@ jobs:
           node-version: "20"
           cache: "npm"
           cache-dependency-path: |
-            utt-plataforma-inscripciones-pagos/services/pagos-service/package-lock.json
+            services/pagos-service/package-lock.json  
 
       - name: Install
-        run: npm ci   
+        run: npm ci   # si en main aún no está el package-lock.json, usa temporalmente: npm install
 
       - name: Lint
         run: npm run lint
