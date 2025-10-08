@@ -215,3 +215,5 @@ El servicio de pagos es modular, mantenible y extensible.
 El pipeline CI/CD automatiza la verificación de calidad del código.
 
 Se documenta la arquitectura con UML, ADR y Swagger.
+
+ESTO SERIA TODO  CREO 
