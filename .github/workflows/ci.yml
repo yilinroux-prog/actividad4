@@ -26,13 +26,10 @@ jobs:
         with:
           node-version: "20"
           cache: "npm"
-          cache-dependency-path: |
-            services/pagos-service/package-lock.json
+          cache-dependency-path: package-lock.json  # 👈 corregido
 
       - name: Install
-        run: npm ci
-        # Si en main aún no existe package-lock.json, usa temporalmente:
-        # run: npm install
+        run: npm ci                                # usa lockfile
 
       - name: Lint
         run: npm run lint
